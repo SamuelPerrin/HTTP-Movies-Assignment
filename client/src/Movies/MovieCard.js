@@ -15,10 +15,17 @@ const MovieCard = props => {
     axios
       .delete(`http://localhost:5000/api/movies/${params.id}`)
       .then(res => {
-        history.push('/')
+        console.log('DELETE:', res);
+        axios
+          .get('http://localhost:5000/api/movies')
+          .then(res => {
+            props.setMovieList(res.data);
+          })
+          .catch(err => console.log('error in 2nd GET:', {err}))
+        history.push('/');
       })
       .catch(err => {
-        console.log('DELETE:', {err})
+        console.log('error in DELETE:', {err})
       })
   }
 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const initialValues = {
@@ -11,6 +12,7 @@ const initialValues = {
 
 const AddForm = props => {
   const [formValues, setFormValues] = useState(initialValues);
+  const history = useHistory();
 
   const handleChange = e => {
     if (e.target.name === 'stars') {
@@ -25,8 +27,10 @@ const AddForm = props => {
     axios
       .post('http://localhost:5000/api/movies', formValues)
       .then(res => {
+        console.log('POST:', res);
         props.setMovieList(res.data);
         setFormValues(initialValues);
+        history.push('/');
       })
       .catch(err => console.log("POST error", {err}))
   }
