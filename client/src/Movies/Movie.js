@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import MovieCard from "./MovieCard";
 
 function Movie({ addToSavedList }) {
+  const isFocus = true;
   const [movie, setMovie] = useState(null);
   const params = useParams();
 
@@ -28,7 +29,7 @@ function Movie({ addToSavedList }) {
 
   return (
     <div className="save-wrapper">
-      <MovieCard movie={movie} />
+      <MovieCard movie={movie} isFocus={isFocus} />
 
       <div className="save-button" onClick={saveMovie}>
         Save
